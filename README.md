@@ -6,7 +6,7 @@
 
 <p align="center">
   <a href="https://git.io/typing-svg">
-    <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&pause=1200&color=E62429&center=true&vCenter=true&width=620&lines=Software+Developer+em+constru%C3%A7%C3%A3o;Estudante+de+ADS+na+FIAP;Grandes+coisas+n%C3%A3o+acontecem+por+acaso." alt="Texto digitando: Software Developer em construção, Estudante de ADS na FIAP"/>
+    <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&pause=1200&color=E62429&center=true&vCenter=true&width=620&lines=Software+Developer+em+constru%C3%A7%C3%A3o;Estudante+de+ADS+na+FIAP" alt="Texto digitando: Software Developer em construção, Estudante de ADS na FIAP"/>
   </a>
 </p>
 

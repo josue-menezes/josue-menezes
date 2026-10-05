@@ -26,17 +26,14 @@
 
 ## 🕸️ Sobre mim
 
-Sou estudante de **Análise e Desenvolvimento de Sistemas na FIAP**, apaixonado por tecnologia, boas histórias e tudo que envolve construção e propósito.
+Olá :)
+Me chamo Josué, sou estudante de Análise e Desenvolvimento de Sistemas na FIAP.
 
-Gosto de resolver problemas, aprender coisas novas e transformar ideias em soluções reais. Atualmente estou focado em evoluir como desenvolvedor, fortalecer meu portfólio e construir uma carreira sólida na área de tecnologia.
+Atualmente desenvolvendo skills como Java, Python, Banco de dados, I.a, ChatBot e Business Model 
+através da criação de projetos práticos e solucão problemas reais, Também possuo conhecimento em marketing digital e design, o que amplia minha visão sobre produto, experiência do usuário e soluções digitais.
 
-- 🎓 Cursando ADS na **FIAP**
-- 🛠️ Aprendo construindo projetos reais
-- 🌱 Estudando React, TypeScript, Java e banco de dados Oracle
-- 🤖 Usando IA (Claude) pra acelerar meus estudos e projetos
-- 📍 São Paulo, Brasil
-
-> *Disciplina, constância e fé são parte do processo.*
+Busco oportunidade para aprender na prática, participar de projetos e evoluir na área de tecnologia.
+Aberto a conexões com profissionais de desenvolvimento e inovação.
 
 ---
 

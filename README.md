@@ -2,15 +2,11 @@
   <img src="assets/banner.jpg" alt="Silhueta de um dev sentado no alto de um prédio olhando a cidade ao pôr do sol" width="100%"/>
 </p>
 
-<h1 align="center">Hi 👋, I'm Josué</h1>
+# Josué Menezes 🕷️👨🏻‍💻
 
-<p align="center">
-  <a href="https://git.io/typing-svg">
-    <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&pause=1200&color=E62429&center=true&vCenter=true&width=620&lines=Software+Developer+em+constru%C3%A7%C3%A3o;Estudante+de+ADS+na+FIAP" alt="Texto digitando: Software Developer em construção, Estudante de ADS na FIAP"/>
-  </a>
-</p>
+`Software Developer` · `Estudante de ADS na FIAP`
 
-<p align="center">
+<p>
   <a href="https://www.linkedin.com/in/josu%C3%A9-menezes/">
     <img src="https://img.shields.io/badge/LinkedIn-0B1426?style=for-the-badge&logo=linkedin&logoColor=0A66C2" alt="LinkedIn"/>
   </a>

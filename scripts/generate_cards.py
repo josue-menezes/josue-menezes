@@ -23,6 +23,23 @@ MUTED = "#7F8BB0"
 WHITE = "#FFFFFF"
 FONT = "'Segoe UI', Ubuntu, 'Helvetica Neue', Arial, sans-serif"
 
+# Animações de entrada (rodam uma vez quando a imagem carrega)
+ANIM_CSS = (
+    "@keyframes up{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}"
+    "@keyframes draw{to{stroke-dashoffset:0}}"
+    "@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}"
+    "@keyframes pop{0%{opacity:0;transform:scale(0)}70%{opacity:1;transform:scale(1.3)}100%{opacity:1;transform:scale(1)}}"
+    ".up{opacity:0;animation:up .6s ease-out forwards}"
+    ".draw{animation:draw 1.4s cubic-bezier(.4,0,.2,1) forwards}"
+    ".grow{transform-box:fill-box;transform-origin:left;transform:scaleX(0);animation:grow 1.1s cubic-bezier(.4,0,.2,1) .3s forwards}"
+    ".pop{opacity:0;transform-box:fill-box;transform-origin:center;animation:pop .4s ease-out forwards}"
+)
+
+
+def dl(sec):
+    """atraso da animação"""
+    return f'style="animation-delay:{sec:.2f}s"'
+
 QUERY = """
 query($login: String!) {
   user(login: $login) {
@@ -103,7 +120,7 @@ def demo():
 def frame(w, h, inner):
     return (
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}">'
-        f'<style>text{{font-family:{FONT}}}</style>'
+        f'<style>text{{font-family:{FONT}}}{ANIM_CSS}</style>'
         f'<rect x="0.5" y="0.5" width="{w-1}" height="{h-1}" rx="10" fill="{BG}" stroke="{BORDER}"/>'
         f'<rect x="0.5" y="0.5" width="4" height="{h-1}" rx="2" fill="{RED}"/>'
         f'{inner}</svg>'
@@ -133,9 +150,10 @@ def stats_card(d):
              f'<text x="25" y="38" fill="{RED}" font-size="18" font-weight="700">Estatísticas do GitHub</text>']
     for i, (ic, label, val) in enumerate(rows):
         y = 75 + i * 25
-        inner.append(f'<rect x="27" y="{y-10}" width="9" height="9" rx="2" fill="none" stroke="{BLUE}" stroke-width="2" transform="rotate(45 31.5 {y-5.5})"/>'
+        inner.append(f'<g class="up" {dl(0.15 + i*0.12)}>'
+                     f'<rect x="27" y="{y-10}" width="9" height="9" rx="2" fill="none" stroke="{BLUE}" stroke-width="2" transform="rotate(45 31.5 {y-5.5})"/>'
                      f'<text x="50" y="{y}" fill="{TEXT}" font-size="14" font-weight="600">{label}:</text>'
-                     f'<text x="250" y="{y}" fill="{WHITE}" font-size="14" font-weight="700">{val}</text>')
+                     f'<text x="250" y="{y}" fill="{WHITE}" font-size="14" font-weight="700">{val}</text></g>')
     # anel com total de contribuições
     import math
     r, cx, cy = 48, 395, 110
@@ -143,10 +161,11 @@ def stats_card(d):
     pct = min(d["total"] / 365, 1)
     inner.append(
         f'<circle cx="{cx}" cy="{cy}" r="{r}" fill="none" stroke="{BORDER}" stroke-width="8"/>'
-        f'<circle cx="{cx}" cy="{cy}" r="{r}" fill="none" stroke="{RED}" stroke-width="8" stroke-linecap="round"'
-        f' stroke-dasharray="{circ*pct:.1f} {circ:.1f}" transform="rotate(-90 {cx} {cy})"/>'
-        f'<text x="{cx}" y="{cy+4}" text-anchor="middle" fill="{WHITE}" font-size="24" font-weight="800">{d["total"]}</text>'
-        f'<text x="{cx}" y="{cy+22}" text-anchor="middle" fill="{MUTED}" font-size="10">contribuições</text>')
+        f'<circle class="draw" cx="{cx}" cy="{cy}" r="{r}" fill="none" stroke="{RED}" stroke-width="8" stroke-linecap="round"'
+        f' pathLength="100" stroke-dasharray="{pct*100:.1f} 100" stroke-dashoffset="{pct*100:.1f}"'
+        f' transform="rotate(-90 {cx} {cy})" {dl(0.3)}/>'
+        f'<g class="up" {dl(0.9)}><text x="{cx}" y="{cy+4}" text-anchor="middle" fill="{WHITE}" font-size="24" font-weight="800">{d["total"]}</text>'
+        f'<text x="{cx}" y="{cy+22}" text-anchor="middle" fill="{MUTED}" font-size="10">contribuições</text></g>')
     return frame(495, 200, "".join(inner))
 
 
@@ -156,19 +175,19 @@ def langs_card(d):
     inner = [web_corner(495),
              f'<text x="25" y="38" fill="{RED}" font-size="18" font-weight="700">Linguagens mais usadas</text>',
              '<clipPath id="bar"><rect x="25" y="58" width="445" height="10" rx="5"/></clipPath>',
-             '<g clip-path="url(#bar)">']
+             '<g clip-path="url(#bar)"><g class="grow">']
     x = 25.0
     for name, (size, color) in top:
         w = 445 * size / total
         inner.append(f'<rect x="{x:.1f}" y="58" width="{w+0.5:.1f}" height="10" fill="{color}"/>')
         x += w
-    inner.append(f'<rect x="{x:.1f}" y="58" width="{470-x:.1f}" height="10" fill="{BORDER}"/></g>')
+    inner.append(f'<rect x="{x:.1f}" y="58" width="{470-x:.1f}" height="10" fill="{BORDER}"/></g></g>')
     for i, (name, (size, color)) in enumerate(top):
         cx = 30 + (i % 2) * 225
         cy = 100 + (i // 2) * 30
-        inner.append(f'<circle cx="{cx}" cy="{cy-4}" r="5" fill="{color}"/>'
+        inner.append(f'<g class="up" {dl(0.9 + i*0.12)}><circle cx="{cx}" cy="{cy-4}" r="5" fill="{color}"/>'
                      f'<text x="{cx+12}" y="{cy}" fill="{TEXT}" font-size="14" font-weight="600">{escape(name)}'
-                     f'<tspan fill="{MUTED}" font-weight="400"> {100*size/total:.1f}%</tspan></text>')
+                     f'<tspan fill="{MUTED}" font-weight="400"> {100*size/total:.1f}%</tspan></text></g>')
     return frame(495, 200, "".join(inner))
 
 
@@ -198,20 +217,20 @@ def streak_card(d):
              f'<line x1="330" y1="35" x2="330" y2="135" stroke="{BORDER}"/>',
              f'<line x1="660" y1="35" x2="660" y2="135" stroke="{BORDER}"/>']
 
-    def block(cx, big, label, sub, color=WHITE):
-        return (f'<text x="{cx}" y="80" text-anchor="middle" fill="{color}" font-size="34" font-weight="800">{big}</text>'
+    def block(cx, big, label, sub, color=WHITE, delay=0.2):
+        return (f'<g class="up" {dl(delay)}><text x="{cx}" y="80" text-anchor="middle" fill="{color}" font-size="34" font-weight="800">{big}</text>'
                 f'<text x="{cx}" y="112" text-anchor="middle" fill="{TEXT}" font-size="15" font-weight="600">{label}</text>'
-                f'<text x="{cx}" y="132" text-anchor="middle" fill="{MUTED}" font-size="12">{sub}</text>')
+                f'<text x="{cx}" y="132" text-anchor="middle" fill="{MUTED}" font-size="12">{sub}</text></g>')
 
     inner.append(block(165, d["total"], "Contribuições", "último ano"))
     r = 38
-    inner.append(f'<circle cx="495" cy="68" r="{r}" fill="none" stroke="{RED}" stroke-width="5"/>'
-                 f'<text x="495" y="80" text-anchor="middle" fill="{WHITE}" font-size="32" font-weight="800">{cur}</text>'
+    inner.append(f'<line x1="495" y1="0" x2="495" y2="{68-r}" stroke="{TEXT}" stroke-width="0.8" opacity="0.6"/>'
+                 f'<circle class="draw" cx="495" cy="68" r="{r}" fill="none" stroke="{RED}" stroke-width="5"'
+                 f' pathLength="100" stroke-dasharray="100 100" stroke-dashoffset="100" transform="rotate(-90 495 68)" {dl(0.4)}/>'
+                 f'<g class="up" {dl(1.0)}><text x="495" y="80" text-anchor="middle" fill="{WHITE}" font-size="32" font-weight="800">{cur}</text>'
                  f'<text x="495" y="130" text-anchor="middle" fill="{TEXT}" font-size="15" font-weight="600">Sequência atual</text>'
-                 f'<text x="495" y="150" text-anchor="middle" fill="{MUTED}" font-size="12">dias seguidos</text>'
-                 # aranha pendurada no anel
-                 f'<line x1="495" y1="0" x2="495" y2="{68-r}" stroke="{TEXT}" stroke-width="0.8" opacity="0.6"/>')
-    inner.append(block(825, longest, "Maior sequência", "último ano", RED))
+                 f'<text x="495" y="150" text-anchor="middle" fill="{MUTED}" font-size="12">dias seguidos</text></g>')
+    inner.append(block(825, longest, "Maior sequência", "último ano", RED, 0.6))
     return frame(w, h, "".join(inner))
 
 
@@ -238,10 +257,11 @@ def activity_card(d):
         val = round(mx * (4 - k) / 4)
         inner.append(f'<line x1="{l}" y1="{y:.1f}" x2="{l+pw}" y2="{y:.1f}" stroke="{BORDER}" stroke-dasharray="3 4"/>'
                      f'<text x="{l-12}" y="{y+4:.1f}" text-anchor="end" fill="{MUTED}" font-size="11">{val}</text>')
-    inner.append(f'<polygon points="{area}" fill="url(#ag)"/>'
-                 f'<polyline points="{line}" fill="none" stroke="{RED}" stroke-width="2.5" stroke-linejoin="round"/>')
+    inner.append(f'<polygon class="up" points="{area}" fill="url(#ag)" {dl(1.2)}/>'
+                 f'<polyline class="draw" points="{line}" fill="none" stroke="{RED}" stroke-width="2.5" stroke-linejoin="round"'
+                 f' pathLength="100" stroke-dasharray="100 100" stroke-dashoffset="100" style="animation-duration:2s;animation-delay:.2s"/>')
     for i, ((x, y), (ds, c)) in enumerate(zip(pts, days)):
-        inner.append(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="3.5" fill="{BG}" stroke="{BLUE}" stroke-width="2"/>')
+        inner.append(f'<circle class="pop" cx="{x:.1f}" cy="{y:.1f}" r="3.5" fill="{BG}" stroke="{BLUE}" stroke-width="2" {dl(0.2 + 2.0*i/len(days))}/>')
         if i % 3 == 0 or i == len(days) - 1:
             inner.append(f'<text x="{x:.1f}" y="{t+ph+22}" text-anchor="middle" fill="{MUTED}" font-size="11">{ds[8:10]}/{ds[5:7]}</text>')
     return frame(w, h, "".join(inner))

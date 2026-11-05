@@ -9,9 +9,6 @@
   <a href="mailto:josuedasilvamenezes3@gmail.com">
     <img src="https://img.shields.io/badge/Gmail-0B1426?style=for-the-badge&logo=gmail&logoColor=E62429" alt="Gmail"/>
   </a>
-  <a href="https://github.com/josue-menezes">
-    <img src="https://img.shields.io/badge/GitHub-0B1426?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"/>
-  </a>
 </p>
 
 <img src="assets/sec-sobre.svg" alt="> cat sobre_mim.txt" width="100%"/>

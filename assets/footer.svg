@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="150" viewBox="0 0 1000 150">
+<style>
+.swing{transform-origin:500px 0;animation:swing 4s ease-in-out infinite} @keyframes swing{0%,100%{transform:rotate(-14deg)}50%{transform:rotate(14deg)}}
+.fade{animation:fade 4s ease-in-out infinite} @keyframes fade{50%{opacity:.5}}
+</style>
+<defs><clipPath id="f"><rect width="1000" height="150" rx="14"/></clipPath></defs>
+<g clip-path="url(#f)">
+  <rect width="1000" height="150" fill="#0B1426"/>
+  <path d="M0 92 Q62.5 74 125 92 T250 92 Q312.5 74 375 92 T500 92 Q562.5 74 625 92 T750 92 Q812.5 74 875 92 T1000 92 Q1062.5 74 1125 92 T1250 92 Q1312.5 74 1375 92 T1500 92 Q1562.5 74 1625 92 T1750 92 Q1812.5 74 1875 92 T2000 92 V150 H0 Z" fill="#3B6BF0" fill-opacity="0.25"><animateTransform attributeName="transform" type="translate" from="0 0" to="-1000 0" dur="14s" repeatCount="indefinite"/></path>
+  <path d="M0 104 Q62.5 90 125 104 T250 104 Q312.5 90 375 104 T500 104 Q562.5 90 625 104 T750 104 Q812.5 90 875 104 T1000 104 Q1062.5 90 1125 104 T1250 104 Q1312.5 90 1375 104 T1500 104 Q1562.5 90 1625 104 T1750 104 Q1812.5 90 1875 104 T2000 104 V150 H0 Z" fill="#E62429" fill-opacity="0.3"><animateTransform attributeName="transform" type="translate" from="-1000 0" to="0 0" dur="10s" repeatCount="indefinite"/></path>
+  <path d="M0 150 V112 H40 V96 H70 V118 H110 V84 H150 V108 H190 V70 H210 V60 H230 V70 H250 V104 H300 V90 H340 V114 H390 V78 H430 V100 H480 V88 H520 V116 H560 V74 H600 V102 H650 V92 H690 V112 H740 V80 H780 V106 H830 V94 H870 V118 H920 V86 H960 V108 H1000 V150 Z" fill="#060B17"/>
+  <g class="swing"><line x1="500" y1="0" x2="500" y2="58" stroke="#C9D6FF" stroke-opacity=".7"/><g transform="translate(500 66)"><g transform="scale(1.2)"><g fill="#E62429">
+  <ellipse cx="0" cy="6" rx="7" ry="9"/><circle cx="0" cy="-5" r="5"/>
+  <g stroke="#E62429" stroke-width="2" fill="none" stroke-linecap="round">
+    <path d="M-5 0 L-14 -8 L-18 -2"/><path d="M-6 4 L-17 2 L-21 9"/><path d="M-6 9 L-16 13 L-18 21"/><path d="M-4 13 L-11 21 L-11 28"/>
+    <path d="M5 0 L14 -8 L18 -2"/><path d="M6 4 L17 2 L21 9"/><path d="M6 9 L16 13 L18 21"/><path d="M4 13 L11 21 L11 28"/>
+  </g>
+  <circle cx="-2" cy="-6" r="1.3" fill="#fff"/><circle cx="2" cy="-6" r="1.3" fill="#fff"/>
+</g></g></g></g>
+  <text x="500.0" y="128" text-anchor="middle" font-family="'JetBrains Mono','Fira Code',Consolas,'Courier New',monospace" font-size="15" fill="#C9D6FF" class="fade">obrigado pela visita · volte sempre pra ver a teia crescer</text>
+</g>
+</svg>

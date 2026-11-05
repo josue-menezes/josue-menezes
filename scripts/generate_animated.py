@@ -75,7 +75,7 @@ def typed(text, x, y, size, color, begin, dur, font=MONO, weight="400", ident="t
 def header():
     W, H = 1000, 330
     roles = ["Software Developer", "Java  |  Python  |  React  |  Oracle", "Estudante de ADS na FIAP"]
-    cycle = 12  # segundos para mostrar os 3 subtítulos
+    cycle = 9  # segundos para mostrar os 3 subtítulos
     role_svg = []
     for i, role in enumerate(roles):
         s, e = i / len(roles), (i + 1) / len(roles)
@@ -87,7 +87,7 @@ def header():
             kt, vals = f"0;{s:.3f};{s + 0.02:.3f};{e - 0.02:.3f};{e:.3f};1", "0;0;1;1;0;0"
         role_svg.append(f'<text x="64" y="232" font-family="{MONO}" font-size="21" fill="{TEXT}" opacity="{1 if i == 0 else 0}">'
                         f'<tspan fill="{RED}">&gt;</tspan> {escape(role)}'
-                        f'<animate attributeName="opacity" dur="{cycle}s" begin="3.6s" repeatCount="indefinite" keyTimes="{kt}" values="{vals}"/></text>')
+                        f'<animate attributeName="opacity" dur="{cycle}s" begin="2.6s" repeatCount="indefinite" keyTimes="{kt}" values="{vals}"/></text>')
 
     lights = "".join(
         f'<circle cx="{x}" cy="{y}" r="1.6" fill="#ffd27a"><animate attributeName="opacity" values="0.2;1;0.2" dur="{d}s" begin="{b}s" repeatCount="indefinite"/></circle>'
@@ -95,13 +95,13 @@ def header():
 
     return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}">
 <style>
-.draw *{{stroke-dasharray:1;stroke-dashoffset:1;animation:draw 3.5s ease-out forwards}}
+.draw *{{stroke-dasharray:1;stroke-dashoffset:1;animation:draw 2s ease-out forwards}}
 @keyframes draw{{to{{stroke-dashoffset:0}}}}
 .blink{{animation:blink 1s steps(1) infinite}} @keyframes blink{{50%{{opacity:0}}}}
 .drop{{animation:drop 5s ease-in-out infinite}} @keyframes drop{{0%,100%{{transform:translate(905px,96px)}}50%{{transform:translate(905px,150px)}}}}
 .thread{{animation:thread 5s ease-in-out infinite}} @keyframes thread{{0%,100%{{transform:scaleY(1)}}50%{{transform:scaleY(1.6)}}}}
 .glow{{animation:glow 3s ease-in-out infinite}} @keyframes glow{{50%{{opacity:.55}}}}
-.line{{transform-origin:left;transform:scaleX(0);animation:grow 1.4s ease-out 2.8s forwards}} @keyframes grow{{to{{transform:scaleX(1)}}}}
+.line{{transform-origin:left;transform:scaleX(0);animation:grow 1s ease-out 2s forwards}} @keyframes grow{{to{{transform:scaleX(1)}}}}
 </style>
 <defs>
   <linearGradient id="shade" x1="0" x2="1"><stop offset="0" stop-color="{BG}" stop-opacity=".96"/><stop offset=".55" stop-color="{BG}" stop-opacity=".78"/><stop offset="1" stop-color="{BG}" stop-opacity=".25"/></linearGradient>

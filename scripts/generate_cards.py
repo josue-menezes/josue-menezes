@@ -23,22 +23,22 @@ MUTED = "#7F8BB0"
 WHITE = "#FFFFFF"
 FONT = "'Segoe UI', Ubuntu, 'Helvetica Neue', Arial, sans-serif"
 
-# Animações de entrada (rodam uma vez quando a imagem carrega; ritmo lento de propósito)
+# Animações de entrada (rodam uma vez quando a imagem carrega; ritmo rápido)
 ANIM_CSS = (
     "@keyframes up{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}"
     "@keyframes draw{to{stroke-dashoffset:0}}"
     "@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}"
     "@keyframes pop{0%{opacity:0;transform:scale(0)}70%{opacity:1;transform:scale(1.3)}100%{opacity:1;transform:scale(1)}}"
-    ".up{opacity:0;animation:up 3.6s ease-out forwards}"
-    ".draw{animation:draw 8.4s cubic-bezier(.4,0,.2,1) forwards}"
-    ".grow{transform-box:fill-box;transform-origin:left;transform:scaleX(0);animation:grow 6.6s cubic-bezier(.4,0,.2,1) 1.8s forwards}"
-    ".pop{opacity:0;transform-box:fill-box;transform-origin:center;animation:pop 2.4s ease-out forwards}"
+    ".up{opacity:0;animation:up 1s ease-out forwards}"
+    ".draw{animation:draw 2.4s cubic-bezier(.4,0,.2,1) forwards}"
+    ".grow{transform-box:fill-box;transform-origin:left;transform:scaleX(0);animation:grow 1.8s cubic-bezier(.4,0,.2,1) .4s forwards}"
+    ".pop{opacity:0;transform-box:fill-box;transform-origin:center;animation:pop .7s ease-out forwards}"
 )
 
 
 def dl(sec):
     """atraso da animação"""
-    return f'style="animation-delay:{sec*6:.2f}s"'
+    return f'style="animation-delay:{sec*1.5:.2f}s"'
 
 QUERY = """
 query($login: String!) {
@@ -259,7 +259,7 @@ def activity_card(d):
                      f'<text x="{l-12}" y="{y+4:.1f}" text-anchor="end" fill="{MUTED}" font-size="11">{val}</text>')
     inner.append(f'<polygon class="up" points="{area}" fill="url(#ag)" {dl(1.2)}/>'
                  f'<polyline class="draw" points="{line}" fill="none" stroke="{RED}" stroke-width="2.5" stroke-linejoin="round"'
-                 f' pathLength="100" stroke-dasharray="100 100" stroke-dashoffset="100" style="animation-duration:12s;animation-delay:1.2s"/>')
+                 f' pathLength="100" stroke-dasharray="100 100" stroke-dashoffset="100" style="animation-duration:3s;animation-delay:.3s"/>')
     for i, ((x, y), (ds, c)) in enumerate(zip(pts, days)):
         inner.append(f'<circle class="pop" cx="{x:.1f}" cy="{y:.1f}" r="3.5" fill="{BG}" stroke="{BLUE}" stroke-width="2" {dl(0.2 + 2.0*i/len(days))}/>')
         if i % 3 == 0 or i == len(days) - 1:
